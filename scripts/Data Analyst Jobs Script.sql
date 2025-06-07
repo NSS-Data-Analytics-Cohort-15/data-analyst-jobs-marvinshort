@@ -67,10 +67,11 @@
 
 
 
--- 6a.	Show the average star rating for companies in each state. The output should show the state as `state` and the average rating for the state as `avg_rating`. 
+-- 6a.	Show the average star rating for companies in each state. The output should show the state as `state` and the average rating for the state as `avg_rating`.
 
--- SELECT DISTINCT(location) as state, AVG(star_rating) as avg_rating
+-- SELECT location as state, AVG(star_rating) as avg_rating
 -- FROM data_analyst_jobs
+-- WHERE star_rating IS NOT NULL
 -- GROUP BY location
 
 
@@ -111,46 +112,46 @@
 
 -- 9.	Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. How many companies are there with more that 5000 reviews across all locations?
 
--- SELECT DISTINCT(company), ROUND(AVG(star_rating),2) as avg_star_rating, review_count
+-- SELECT company, ROUND(AVG(star_rating),2) as avg_star_rating
 -- FROM data_analyst_jobs
--- WHERE review_count >5000
--- GROUP BY company, review_count
+-- WHERE review_count >5000 AND COMPANY IS NOT NULL
+-- GROUP BY company
 
--- ANSWER = There are 46 companies with more than 5000 reviews across all locations.
+
+-- ANSWER = There are 40 companies with more than 5000 reviews across all locations.
 
 
 
 -- 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
 
--- SELECT DISTINCT(company), AVG(star_rating) as avg_star_rating, review_count
+-- SELECT company, ROUND(AVG(star_rating),4) as avg_star_rating
 -- FROM data_analyst_jobs
--- WHERE review_count >5000
--- GROUP BY company, review_count
+-- WHERE review_count >5000 AND COMPANY IS NOT NULL
+-- GROUP BY company
 -- ORDER BY avg_star_rating DESC
 
 
--- ANSWER = American Express has the highest average star rating. The rating is 4.199999809
+-- ANSWER = Unilever has the highest average star rating. The rating is 4.2000. However, it's really a 6-way tie between Unilever, General Motors, NIke, American Express, Microsoft, Kaiser Permanente, Lockheed Martin Corporation, and Siemens.
 
 
 
 --11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there?
 
--- SELECT title
+-- SELECT Distinct(title)
 -- FROM data_analyst_jobs
--- WHERE title LIKE '%Analyst%'
+-- WHERE title ILIKE '%Analyst%'
 
 
--- ANSWER = There are 1636 jobs with Analyst in their description
+-- ANSWER = There are 774 jobs with Analyst in their description
 
 
 
 --12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
 
--- SELECT title
--- FROM data_analyst_jobs
--- WHERE title NOT ILIKE '%Analyst%'
--- AND title NOT ILIKE '%Analytics%'
-
+SELECT title
+FROM data_analyst_jobs
+WHERE title NOT ILIKE '%Analyst%'
+AND title NOT ILIKE '%Analytics%'
 
 
 -- ANSWER = There are 4 job titles  that do not contain the words Analyst or Analytics. They all have the word Tableau in common.
@@ -169,14 +170,12 @@
 -- WHERE skill ILIKE '%SQL%'
 -- AND days_since_posting > 21
 -- AND domain is not null
--- GROUP BY domain, title
+-- GROUP BY domain
 -- ORDER BY number_of_jobs_with_sql DESC
 -- limit 3
 
--- ANSWER = Consulting and Business Services, Internet and Software, and Insurance are the Top 3 Industries with SQL as a skill requirement.
 
--- ANSWER
--- Consulting and Business Services = 19 Jobs
--- Internet and Software = 14 Jobs
--- Insurance = 10 Jobs
-
+-- ANSWER = Internet and Software, Banks and Financial Services, Consulting and Business Services are the Top 3 Industries with SQL as a skill requirement.
+-- Internet and Software = 62 Jobs
+-- Banks and Financial Services = 61 Jobs
+-- Consulting and Business Services = 57 Jobs
